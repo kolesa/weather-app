@@ -5,6 +5,9 @@ on:
     branches:
       - '**'
 
+env:
+  WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+
 jobs:
   test:
     name: Run RSpec tests
