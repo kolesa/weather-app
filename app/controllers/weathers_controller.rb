@@ -10,6 +10,6 @@ class WeathersController < ApplicationController
   private
 
   def get_weather(zip_code)
-    # get weather
+    WeatherApiService.new.get_weather_by_zip(zip_code)
   end
 end

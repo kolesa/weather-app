@@ -1,0 +1,11 @@
+<div class="container">
+
+  <h2>Weather Forecast for Zip Code <%= params[:zip_code] %></h2>
+
+  <% if @forecast %>
+    <%= @forecast %>
+
+    <br>
+    <%= link_to "Back to Search", root_path, class: "btn btn-primary"  %>
+  <% end %>
+</div>
