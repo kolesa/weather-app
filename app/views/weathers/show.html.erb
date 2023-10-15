@@ -3,9 +3,26 @@
   <h2>Weather Forecast for Zip Code <%= params[:zip_code] %></h2>
 
   <% if @forecast %>
-    <%= @forecast %>
+    <div class="card">
+      <img class="img-fluid" src="<%= @forecast.weather.first.icon_uri %>" width="200" alt="Card image cap">
+
+      <div class="card-body">
+        <p><b>Temperature:</b> <%= @forecast.main.temp %>°F</p>
+        <p><b>High:</b> <%=  @forecast.main.temp_max %>°F</p>
+        <p><b>Low:</b> <%= @forecast.main.temp_min %>°F</p>
+      </div>
+      <div class="card-footer">
+        <% if @cached %>
+          <p>Forecast data retrieved from cache.</p>
+        <% else %>
+          <p>Forecast data retrieved from the API.</p>
+        <% end %>
+      </div>
+    </div>
 
     <br>
     <%= link_to "Back to Search", root_path, class: "btn btn-primary"  %>
+  <% else %>
+    <p>Unable to retrieve forecast data.</p>
   <% end %>
 </div>
