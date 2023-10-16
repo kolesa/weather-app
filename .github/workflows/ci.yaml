@@ -1,4 +1,4 @@
-name: Run RSpec tests on Production Merge
+name: Run RSpec tests
 
 on:
   push:
