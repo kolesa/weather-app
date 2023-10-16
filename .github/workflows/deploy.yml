@@ -14,6 +14,7 @@ env:
   CONTAINER_NAME: weather-app
   RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
   WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+  SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
 
 permissions:
   id-token: write
@@ -44,7 +45,7 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest . --build-arg RAILS_MASTER_KEY=$RAILS_MASTER_KEY --build-arg WEATHER_API_KEY=$WEATHER_API_KEY --build-arg SECRET_KEY_BASE=$SECRET_KEY_BASE
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:latest"
       - name: Deploy Amazon ECS task definition
